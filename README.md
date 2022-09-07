@@ -86,6 +86,32 @@ $ mv evolver-electron-1.0.0.AppImage-new evolver-electron-1.0.0.AppImage
 $ sudo reboot now
 ```
 
+## Docker
+
+Download and install Docker.
+
+  + Linux: check your package manager / distribution instructions.
+  + Mac: [Instructions](https://docs.docker.com/docker-for-mac/install/)
+  + Windows: [Instructions](https://docs.docker.com/docker-for-windows/install/) (Windows 10) / [Instructions](https://docs.docker.com/toolbox/toolbox_install_windows/) (Windows 7/8)
+  
+Pull, and Build the image:
+
+    `docker build . -t evolveer-electron`
+    `docker run -p 1212:1212 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY`
+
+The container relies on x11 as a GUI provider which can be installed following the instructions below and replacing the environmental variable `DISPLAY=$DISPLAY` with an appropriate line from `Docker Environmental Variables` sub-section
+
+### Docker prerequisites
+You'll need an x11 Server to display the GUI for evolver
+For Macs, you can install [Cygwin](https://www.xquartz.org/) via `brew install --cask xquartz`
+For Windows, you can install [Cygwin](https://x.cygwin.com/)
+### Docker Environmental Variables
+```
+macOS: -e DISPLAY=docker.for.mac.host.internal:0
+Windows: -e DISPLAY=host.docker.internal:0
+Linux: --net=host -e DISPLAY=:0
+```
+
 ## Credit
 
 - [Zachary Heins](https://github.com/zheins)
